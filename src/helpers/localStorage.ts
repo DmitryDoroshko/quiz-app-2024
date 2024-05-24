@@ -8,6 +8,7 @@ export const initializeLocalStorageWithDummyQuizzes = () => {
 
 export const retrieveQuizzesFromLocalStorage = () => {
   const quizzesData = localStorage.getItem(LOCAL_STORAGE_QUIZZES_IDENTIFIER);
+  if (quizzesData === "undefined") return null;
   return quizzesData ? JSON.parse(quizzesData) : null;
 };
 
