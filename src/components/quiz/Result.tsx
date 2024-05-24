@@ -11,12 +11,17 @@ const Result: React.FC = () => {
   const totalQuestions = currentQuiz?.questions.length || 0;
 
   const handleRestart = () => {
-    dispatch(restartQuiz());
+    if (currentQuizId !== null) {
+      dispatch(restartQuiz(currentQuizId));
+      return;
+    }
+
+    throw new Error("Current Quiz is not valid.");
   };
 
   return (
     <Container>
-      <Typography variant="h4">Your Score: {score} / {totalQuestions}</Typography>
+      <Typography variant="h4">Your Score: {score} points for {totalQuestions} questions</Typography>
       <List>
         {currentQuiz?.questions.map((question) => (
           <ListItem key={question.id}>

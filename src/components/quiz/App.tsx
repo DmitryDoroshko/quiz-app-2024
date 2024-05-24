@@ -28,7 +28,7 @@ const App: React.FC = () => {
       initializeLocalStorageWithDummyQuizzes();
     }
     dispatch(getAllQuizzesThunk());
-    dispatch(setQuizzes(quizzesData.quizzes));
+    dispatch(setQuizzes(quizzesData || []));
   }, [dispatch]);
 
   return (

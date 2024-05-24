@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { Delete, Edit, PlayArrow } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks.ts";
-import { deleteQuiz, setEditingQuiz, setSearchQuery, startQuiz } from "../../store/quiz/quizSlice.ts";
+import { deleteQuiz, setCurrentQuiz, setEditingQuiz, setSearchQuery, startQuiz } from "../../store/quiz/quizSlice.ts";
 import QuizForm from "./QuizForm.tsx";
 import { IQuiz } from "../../types/quizTypes.ts";
 import { selectEditingQuiz, selectQuizzes, selectSearchQuery } from "../../store/quiz/quizSelectors.ts";
@@ -34,15 +34,16 @@ const QuizList: React.FC = () => {
   };
 
   const handleStartQuiz = (id: string) => {
+    dispatch(setCurrentQuiz(id));
     dispatch(startQuiz(id));
   };
 
   const handleEditQuiz = (quiz: IQuiz) => {
-    setEditingQuiz(quiz);
+    dispatch(setEditingQuiz(quiz));
   };
 
   const handleCloseForm = () => {
-    setEditingQuiz(null);
+    dispatch(setEditingQuiz(null));
   };
 
   return (
@@ -77,7 +78,7 @@ const QuizList: React.FC = () => {
           </ListItem>
         ))}
       </List>
-      {editingQuiz && <QuizForm quiz={editingQuiz} onClose={handleCloseForm} />}
+      {editingQuiz && <QuizForm quiz={editingQuiz} onClose={handleCloseForm} isEditing={true} />}
     </Container>
   );
 };

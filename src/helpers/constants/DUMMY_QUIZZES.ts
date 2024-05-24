@@ -27,7 +27,7 @@ export const DUMMY_QUIZZES: IQuiz[] = [
         points: 15,
       },
     ],
-    rating: 4.5,
+    rating: 25,
   },
   {
     id: "2",
@@ -55,6 +55,6 @@ export const DUMMY_QUIZZES: IQuiz[] = [
         points: 15,
       },
     ],
-    rating: 4.0,
+    rating: 25,
   },
 ];

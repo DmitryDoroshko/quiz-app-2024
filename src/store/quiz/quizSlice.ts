@@ -37,6 +37,7 @@ const quizSlice = createSlice({
     },
     setCurrentQuiz(state, action: PayloadAction<string>) {
       state.currentQuizId = action.payload;
+      state.currentQuiz = state.quizzes.find(quiz => quiz.id === action.payload)!;
       state.currentQuestionIndex = DEFAULT_QUIZ_ID;
       state.score = 0;
     },
@@ -60,9 +61,11 @@ const quizSlice = createSlice({
       state.score = 0;
       state.timer = TIMER_TIME_IN_SECONDS;
     },
-    restartQuiz(state) {
+    restartQuiz(state, action: PayloadAction<string>) {
+      state.currentQuizId = action.payload;
       state.currentQuestionIndex = DEFAULT_QUIZ_ID;
       state.score = 0;
+      state.timer = TIMER_TIME_IN_SECONDS;
     },
     setSearchQuery(state, action: PayloadAction<string>) {
       state.searchQuery = action.payload;
