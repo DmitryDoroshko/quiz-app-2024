@@ -16,8 +16,8 @@ interface IQuizService {
  export class QuizService implements IQuizService {
    async getAllQuizzes(): Promise<IQuiz[]> {
      await delay(DELAY_TIME_IN_MILLISECONDS); // Simulate artificial delay
-     const quizzesStr = localStorage.getItem(LOCAL_STORAGE_QUIZZES_IDENTIFIER);
-     return quizzesStr ? JSON.parse(quizzesStr) : [];
+     const quizzesString = localStorage.getItem(LOCAL_STORAGE_QUIZZES_IDENTIFIER);
+     return quizzesString ? JSON.parse(quizzesString) : [];
    }
 
    async setAllQuizzes(quizzes: IQuiz[]): Promise<IQuiz[]> {
