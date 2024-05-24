@@ -14,6 +14,7 @@ import { deleteQuiz, setCurrentQuiz, setEditingQuiz, setSearchQuery, startQuiz }
 import QuizForm from "./QuizForm.tsx";
 import { IQuiz } from "../../types/quizTypes.ts";
 import { selectEditingQuiz, selectQuizzes, selectSearchQuery } from "../../store/quiz/quizSelectors.ts";
+import { deleteQuizThunk } from "../../store/quiz/quizThunks.ts";
 
 const QuizList: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -25,8 +26,11 @@ const QuizList: React.FC = () => {
     quiz.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
+    // Delete from store
     dispatch(deleteQuiz(id));
+    // Then delete on the backend side
+    await dispatch(deleteQuizThunk(id));
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
